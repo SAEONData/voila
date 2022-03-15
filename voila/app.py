@@ -43,6 +43,7 @@ from jupyter_server.base.handlers import FileFindHandler, path_regex
 from jupyter_server.config_manager import recursive_update
 from jupyter_server.utils import url_path_join, run_sync
 from jupyter_server.services.config import ConfigManager
+from jupyter_server.auth.authorizer import AllowAllAuthorizer  # mark@saeon
 
 from jupyterlab_server.themes_handler import ThemesHandler
 
@@ -465,6 +466,7 @@ class Voila(Application):
         )
 
         self.app.settings.update(self.tornado_settings)
+        self.app.settings.update(dict(authorizer=AllowAllAuthorizer()))  # mark@saeon
 
         handlers = []
 
